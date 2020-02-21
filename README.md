@@ -6,6 +6,7 @@ This repo is the project page of the 3 project repos and contains information ab
 ![png](assets/BertelsmannChallenge.png)
 
 ## Project Artifact Repositories
+![png](assets/cicdworkflow.png)
 The project has 3 code and artifact repositories:
 ### [ai-frontend](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-frontend)
 > * This repo contains the project website static files **_index.html_** and **_app.js_**
