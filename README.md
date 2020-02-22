@@ -141,7 +141,7 @@ The project transforms the original infrastructure of a RNN sentiment prediction
   ---
 #### Scenario II
 ![png](assets/UC2a.png)
-> 1. The RNN model prediction result returned does not quite met the user’s expectation. The user can click 1 of the 7 available label to override the returned result
+> 1. The RNN model prediction result returned does not quite met the user’s expectation. The user can click one of the seven available labels to override the returned result
 >
 ![png](assets/UC2b.png)
 > 2. User clicks ‘joy’ label to override the returned result ‘sadness’. The revised result is recorded to the DynamoDB
@@ -152,7 +152,7 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 > 1. Approved and revised prediction results are stored in the DynamoDB. The data can be exported to a csv file from the Web UI as a new dataset for retraining the RNN Sentiment Prediction model
 >
 ![png](assets/UC3b.png)
-> 2. User accesses the Csv file download endpoint to download prediction results stored in the DynamoDB. This csv file can then be used as a new dataset for retraining the RNN Sentiment Prediction model
+> 2. User accesses the csv file **[download endpoint](https://gvvik49go8.execute-api.us-west-2.amazonaws.com/prod/getcsv)** to download prediction results stored in the DynamoDB. This csv file can then be used as a new dataset for retraining the RNN Sentiment Prediction model
 >
 >
 ### Implementation Impediments and Resolutions
