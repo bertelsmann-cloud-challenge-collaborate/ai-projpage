@@ -5,7 +5,7 @@ This repo is the project page of the 3 project repos and contains information ab
 
 ![png](assets/BertelsmannChallenge.png)
 
-## See [AI Sentiment Prediction App Presentation deck](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-projpage/blob/feature/enhancement/AIAppOnAWS.pdf) in PDF or download PowerPoint version [here](https://drive.google.com/file/d/1A-b3T09ZwtVTMRjlbrgzPMy89LiZsT-u/view?usp=sharing)
+## See [AI Sentiment Prediction App Presentation deck](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-projpage/blob/feature/enhancement/AIAppOnAWS.pdf) in PDF or download PowerPoint version [here](https://drive.google.com/file/d/1f_eiSI39L33wPkSJYZa1RudLj89NI8N4/view?usp=sharing)
 
 ## AI Sentiment Prediction App on AWS infrastructure
 ![png](assets/RNNappOnAWS.png)
