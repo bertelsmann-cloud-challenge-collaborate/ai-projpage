@@ -100,7 +100,7 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 > * Microservices
 >
 >
-### Cloud Infrastruture Deployment Workflow
+### Cloud Infrastruture Deployment Workflow 
 ![png](assets/depoywf.png)
 > * DevOps team merges feature branches to the master branch and pushes to one of the three remote masters
 >
