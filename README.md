@@ -5,6 +5,9 @@ This repo is the project page of the 3 project repos and contains information ab
 
 ![png](assets/BertelsmannChallenge.png)
 
+## AI Sentiment Prediction App on AWS infrastructure
+![png](assets/RNNappOnAWS.png)
+
 ## Project Artifact Repositories
 ![png](assets/cicdworkflow.png)
 The project has 3 code and artifact repositories:
@@ -17,14 +20,42 @@ The project has 3 code and artifact repositories:
 > * this repo contains the Serverless Framework configuration file **_serverless.yml_** and Lambda function code files for deployment of Lambda functions, their triggering events and required infrastructure resources (DynamoDB, API Gateway and S3) to AWS
 >
 > * any changes pushed to the master branch will trigger the Github CI/CD Action on the repo to start serverless deployment of the changes to AWS
-
+>
+>
 ### [ai-backend](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-backend)
 > * this repo contains the code files for building and pushing a Flask docker image to ECR, then deploying a new task definition to ECS
 >
 > * any changes pushed to the master branch will trigger the Github CI/CD Action on the repo to apply and deploy the changes to AWS
 
+## AI Sentiment Prediction App Use Case Demo
+### Scenario I
+![png](assets/UC1a.png)
+> 1. User enters a text in the web UI and click Submit to get a sentiment prediction result
+>
+> 2. The RNN model returns a label (e.g. guilt) representing the predicted sentiment, which user can approve or revise
+>
+![png](assets/UC1b.png)
+> 3. User clicks Approve button to accept the prediction result. The result is recorded to the DynamoDB
+>
+  ---
+### Scenario II
+![png](assets/UC2a.png)
+> 1. The RNN model prediction result returned does not quite met the user’s expectation. The user can click one of the seven available labels to override the returned result
+>
+![png](assets/UC2b.png)
+> 2. User clicks ‘joy’ label to override the returned result ‘sadness’. The revised result is recorded to the DynamoDB
+>
+ ---
+### Scenario III
+![png](assets/UC3a.png)
+> 1. Approved and revised prediction results are stored in the DynamoDB. The data can be exported to a csv file from the Web UI as a new dataset for retraining the RNN Sentiment Prediction model
+>
+![png](assets/UC3b.png)
+> 2. User accesses the csv file **[download endpoint](https://gvvik49go8.execute-api.us-west-2.amazonaws.com/prod/getcsv)** to download prediction results stored in the DynamoDB. This csv file can then be used as a new dataset for retraining the RNN Sentiment Prediction model
+>
+>
 ## Project Information
-The project transforms the original infrastructure of a RNN sentiment prediction app to an AWS cloud deployable infrastructure.
+The project transforms the original infrastructure of an AI sentiment prediction app (trained on the RNN model) to an AWS cloud deployable infrastructure.
 
 **Project Goals**: Implements various AWS cloud stack concepts covered in Phase I of the scholoarship challenge, namely Lesson 12 thru 23, plus additional advanced concepts such as Serverless Framework, CI/CD, Docker, API Gateway, ECS, DockerHub, DynamoDB and Microservices.
 
@@ -33,9 +64,9 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 * [Audrey ST](https://github.com/atan4583) (Australia)
 * [Christopher R](https://github.com/christopherrauh) (Germany)
 
-**Website**: :star2: **[RNN Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** :star2:
+**Website**: :star2: **[AI Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** :star2:
 
-### RNN Sentiment Prediction App Original Infrastructure (Logical View)
+### AI Sentiment Prediction App Original Infrastructure (Logical View)
 ![png](assets/architecture-orig.png)
 #### The original architecture of the AI app consists of
 > * a Flask app backend hosting a RNN sentiment prediction model
@@ -47,7 +78,7 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 > * It is styled in Microservices fashion. This makes the infrastructure and its underlying components easily transformable to AWS cloud deployable infrastructure
 >
 >
-### RNN Sentiment Prediction App Transformed Cloud Infrastructure (Logical View)
+### AI Sentiment Prediction App Transformed Cloud Infrastructure (Logical View)
 ![png](assets/architecture-cloud.png)
 #### The transformation resulted in a streamlined infrastructure as below:
 > * the Flask backend now runs in a docker container and utilizes AWS ECS
@@ -64,7 +95,7 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 > * predictable operation performance with minimum effort and improved overall user experience
 >
 >
-### RNN Sentiment Prediction App on AWS Cloud Infrastructure (Physical Implementation)
+### AI Sentiment Prediction App on AWS Cloud Infrastructure (Physical Implementation)
 ![png](assets/RNNappOnAWS.png)
 #### Cloud Lesson Concepts Implemented
 > * GitHub:  Lesson 1 - 12
@@ -100,7 +131,7 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 > * Microservices
 >
 >
-### Cloud Infrastruture Deployment Workflow 
+### Cloud Infrastruture Deployment Workflow
 ![png](assets/depoywf.png)
 > * DevOps team merges feature branches to the master branch and pushes to one of the three remote masters
 >
@@ -128,33 +159,6 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 >   c. Depending on website traffic, AWS ECS and Auto Scaling group orchestrate to scale up to 3 Flask container instances to optimize workload distribution and app response time
 >
 >
-### RNN Sentiment Prediction App Use Case Demo
-#### Scenario I
-![png](assets/UC1a.png)
-> 1. User enters a text in the web UI and click Submit to get a sentiment prediction result
->
-> 2. The model returns a label (e.g. guilt) representing the predicted sentiment, which user can approve or revise
->
-![png](assets/UC1b.png)
-> 3. User clicks Approve button to accept the prediction result. The result is recorded to the DynamoDB
->
-  ---
-#### Scenario II
-![png](assets/UC2a.png)
-> 1. The RNN model prediction result returned does not quite met the user’s expectation. The user can click one of the seven available labels to override the returned result
->
-![png](assets/UC2b.png)
-> 2. User clicks ‘joy’ label to override the returned result ‘sadness’. The revised result is recorded to the DynamoDB
->
- ---
-#### Scenario III
-![png](assets/UC3a.png)
-> 1. Approved and revised prediction results are stored in the DynamoDB. The data can be exported to a csv file from the Web UI as a new dataset for retraining the RNN Sentiment Prediction model
->
-![png](assets/UC3b.png)
-> 2. User accesses the csv file **[download endpoint](https://gvvik49go8.execute-api.us-west-2.amazonaws.com/prod/getcsv)** to download prediction results stored in the DynamoDB. This csv file can then be used as a new dataset for retraining the RNN Sentiment Prediction model
->
->
 ### Implementation Impediments and Resolutions
 This is a POC (proof of concept) project the project team put together to implement and practice basic cloud DevOps concepts from this phase I Challenge and experiment advanced concepts nominated by team members.
 
@@ -165,6 +169,6 @@ The project was 100% unfunded and utilized AWS free-tier account to conduct the 
 >
 ### Free Tier Budget Analysis and Usage Forecast
 ![png](assets/ftbudget.png)
-> The All Free Tier services by usage report on the Cost Management Console shows ECR is the largest consumer of the free tier budget. With DockerHub in its place, ECR will stop burning the budget. The **[RNN Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** cloud can now stay on for live demo purpose
+> The All Free Tier services by usage report on the Cost Management Console shows ECR is the largest consumer of the free tier budget. With DockerHub in its place, ECR will stop burning the budget. The **[AI Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** cloud can now stay on for live demo purpose
 >
 >
