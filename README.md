@@ -102,30 +102,30 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 >
 ### Cloud Infrastruture Deployment Workflow
 ![png](assets/depoywf.png)
-> * DevOps team merges feature branches to the master branch and pushes to 1 of 3 remote masters
+> * DevOps team merges feature branches to the master branch and pushes to one of the three remote masters
 >
-> * Code build - 3 build paths:
+> * Code build - three build paths:
 >
->     1. If the push is onto **ai-frontend** repo, CI/CD Action **_Upload Website_** automatically runs to upload updated static files (index.html, app.js) to AWS S3 website **udacity-ai-frontend**
+>   1. If the push is onto **ai-frontend** repo, CI/CD Action **_Upload Website_** automatically runs to upload updated static files (index.html, app.js) to AWS S3 website **udacity-ai-frontend**
 >
->     2. If the push is onto **ai-backend** repo, CI/CD Action **_Deploy to Amazon ECS_** automatically runs to build a new Flask container to push to the DockerHub, then deploys a new ECS task definition to start container operation on AWS cloud
+>   2. If the push is onto **ai-backend** repo, CI/CD Action **_Deploy to Amazon ECS_** automatically runs to build a new Flask container to push to the DockerHub, then deploys a new ECS task definition to start container operation on AWS cloud
 >
->     3. If the push is onto **ai-automation** repo, CI/CD Action automatically runs a serverless.yml configuration file to deploy Lambda functions, their triggering events and required infrastructure resources (DynamoDB, API Gateway and S3) to AWS and rebuild the website
+>   3. If the push is onto **ai-automation** repo, CI/CD Action automatically runs a serverless.yml configuration file to deploy Lambda functions, their triggering events and required infrastructure resources (DynamoDB, API Gateway and S3) to AWS and rebuild the website
 >
 >
 ### Cloud Infrastruture Operation Workflow
 ![png](assets/opswf.png)
 > * RNN Sentiment Prediction App Operation
 >
->     a. User submits a sentiment prediction request thru website UI and receives a result
+>   a. User submits a sentiment prediction request thru website UI and receives a result
 >
 >        - User approves the prediction result, the approved result is written to the DynamoDB
 >
 >        - User revises the prediction result, the revised result is written to the DynamoDB
 >
->     b. User downloads prediction results stored in the DynamoDB as a CSV file for use as a new dataset for retraining of the RNN model
+>   b. User downloads prediction results stored in the DynamoDB as a CSV file for use as a new dataset for retraining of the RNN model
 >
->     c. Depending on website traffic, AWS ECS and Auto Scaling group orchestrate to scale up to 3 Flask container instances to optimize workload distribution and app response time
+>   c. Depending on website traffic, AWS ECS and Auto Scaling group orchestrate to scale up to 3 Flask container instances to optimize workload distribution and app response time
 >
 >
 ### RNN Sentiment Prediction App Use Case Demo
