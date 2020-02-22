@@ -9,29 +9,31 @@ This repo is the project page of the 3 project repos and contains information ab
 ![png](assets/cicdworkflow.png)
 The project has 3 code and artifact repositories:
 ### [ai-frontend](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-frontend)
-> * This repo contains the project website static files **_index.html_** and **_app.js_**
+> * this repo contains the project website static files **_index.html_** and **_app.js_**
 >
-> * The files reside in the **_static_** folder, any changes pushed onto the master branch will trigger the GitHub CI/CD Action on the repo to copy the 2 static files to the S3 bucket hosting the project website on AWS
+> * the files reside in the **_static_** folder, any changes pushed onto the master branch will trigger the GitHub CI/CD Action on the repo to copy the static files to the S3 bucket hosting the project website on AWS
 
 ### [ai-automation](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-automation)
-> * This repo contains the Serverless Framework configuration file **_serverless.yml_** and Lambda function code files for deployment of Lambda functions, their triggering events and required infrastructure resources (e.g. DynamoDB, S3) to AWS.
+> * this repo contains the Serverless Framework configuration file **_serverless.yml_** and Lambda function code files for deployment of Lambda functions, their triggering events and required infrastructure resources (DynamoDB, API Gateway and S3) to AWS
 >
-> * Any changes pushed to the master branch will trigger the Github CI/CD Action on the repo to deploy the changes to AWS
+> * any changes pushed to the master branch will trigger the Github CI/CD Action on the repo to start serverless deployment of the changes to AWS
 
 ### [ai-backend](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-backend)
-> * This repo contains the code files for building and pushing a Flask docker image to ECR, then deploying a new task definition to ECS
+> * this repo contains the code files for building and pushing a Flask docker image to ECR, then deploying a new task definition to ECS
 >
-> * Any changes pushed to the master branch will trigger the Github CI/CD Action on the repo to apply and deploy the changes to AWS
+> * any changes pushed to the master branch will trigger the Github CI/CD Action on the repo to apply and deploy the changes to AWS
 
 ## Project Information
 The project transforms the original infrastructure of a RNN sentiment prediction app to an AWS cloud deployable infrastructure.
 
-**Project Goals**: Implements various AWS cloud stack concepts covered in Phase I of the scholoarship challenge, namely Lesson 12 thru 23, plus additional advanced concepts such as Serverless Framework, CI/CD, Docker, API Gateway, ECS, ECR, DynamoDB and Microservices.
+**Project Goals**: Implements various AWS cloud stack concepts covered in Phase I of the scholoarship challenge, namely Lesson 12 thru 23, plus additional advanced concepts such as Serverless Framework, CI/CD, Docker, API Gateway, ECS, DockerHub, DynamoDB and Microservices.
 
 **Project Team**: an international team with 3 members from Phase I of the Cloud Track Challenge:
 * [Adrik S](https://github.com/Adriks976) (France)
 * [Audrey ST](https://github.com/atan4583) (Australia)
-* [Christopher R](https://github.com/christopherrauh) (Germany).
+* [Christopher R](https://github.com/christopherrauh) (Germany)
+
+**Website**: :star2: **[RNN Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** :star2:
 
 ### RNN Sentiment Prediction App Original Infrastructure (Logical View)
 ![png](assets/architecture-orig.png)
@@ -87,7 +89,7 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 >
 > * AWS ECS (elastic container service)
 >
-> * AWS ECR (elastic container registry)
+> * DockerHub (container image registry)
 >
 > * Flask Docker (scaling between 1 to 3 instances)
 >
@@ -98,37 +100,32 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 > * Microservices
 >
 >
-### Workflows of the DevOps Model built on Serverless Framework and AWS Services
-#### Workflow I
-> * DevOps team merges feature branches to the master branch in 1 of the 3 GitHub repositories
+### Cloud Infrastruture Deployment Workflow
+![png](assets/depoywf.png)
+> * DevOps team merges feature branches to the master branch and pushes to 1 of 3 remote masters
 >
-> * Pushes to the relevant remote master branch
+> * Code build - 3 build paths:
 >
- ---
-#### Workflow II
-> * Code build process via 1 of the 3 build paths based on the repo receiving the push:
+>     1. If the push is onto **ai-frontend** repo, CI/CD Action **_Upload Website_** automatically runs to upload updated static files (index.html, app.js) to AWS S3 website **udacity-ai-frontend**
 >
->  * If the push is onto **ai-frontend** repo, CI/CD Action **_Upload Website_** automatically runs to upload updated static files (index.html, app.js) to AWS S3 website **udacity-ai-frontend**
+>     2. If the push is onto **ai-backend** repo, CI/CD Action **_Deploy to Amazon ECS_** automatically runs to build a new Flask container to push to the DockerHub, then deploys a new ECS task definition to start container operation on AWS cloud
 >
->  * If the push is onto **ai-backend** repo, CI/CD Action **_Deploy to Amazon ECS_** automatically runs to build a new Flask container to push to the ECR, then deploy a new task definition to the ECS on AWS cloud
+>     3. If the push is onto **ai-automation** repo, CI/CD Action automatically runs a serverless.yml configuration file to deploy Lambda functions, their triggering events and required infrastructure resources (DynamoDB, API Gateway and S3) to AWS and rebuild the website
 >
->  * If the push is onto **ai-automation** repo, CI/CD Action automatically runs a serverless.yml configuration file to deploy Lambda functions, their triggering events and required infrastructure resources (e.g. DynamoDB, S3) to AWS and rebuild the website
 >
- ---
-#### Workflow III
-> * Sentiment Prediction App Usage Scenarios
+### Cloud Infrastruture Operation Workflow
+![png](assets/opswf.png)
+> * RNN Sentiment Prediction App Operation
 >
->  * User submits a sentiment prediction request thru S3 website **udacity-ai-frontend** and receives a prediction result
+>     a. User submits a sentiment prediction request thru website UI and receives a result
 >
->     - User approves the prediction result, the approved result is written to the DynamoDB
+>        - User approves the prediction result, the approved result is written to the DynamoDB
 >
->     - User revises the prediction result, the revised result is written to the DynamoDB
+>        - User revises the prediction result, the revised result is written to the DynamoDB
 >
->  * User downloads prediction results in the DynamoDB as a CSV (This will be used as a new dataset for re-training of the RNN model)
+>     b. User downloads prediction results stored in the DynamoDB as a CSV file for use as a new dataset for retraining of the RNN model
 >
- ---
-#### Workflow IV
-> * Depending on user usage demands on Sentiment Prediction App, AWS ECS and Auto Scaling group orchestrate to scale up to 3 Flask container instances to optimize workload distribution and app response time
+>     c. Depending on website traffic, AWS ECS and Auto Scaling group orchestrate to scale up to 3 Flask container instances to optimize workload distribution and app response time
 >
 >
 ### RNN Sentiment Prediction App Use Case Demo
@@ -147,12 +144,15 @@ The project transforms the original infrastructure of a RNN sentiment prediction
 > 1. The RNN model prediction result returned does not quite met the user’s expectation. The user can click 1 of the 7 available label to override the returned result
 >
 ![png](assets/UC2b.png)
-> 2. User clicks ‘joy’ label to override the returned result ‘anger’. The revised result is recorded to the DynamoDB
+> 2. User clicks ‘joy’ label to override the returned result ‘sadness’. The revised result is recorded to the DynamoDB
 >
  ---
 #### Scenario III
-![png](assets/UC3.png)
-> User accesses the Csv file download endpoint to download prediction results stored in the DynamoDB. This csv file can then be used as a new dataset for retraining the RNN Sentiment Prediction model.
+![png](assets/UC3a.png)
+> 1. Approved and revised prediction results are stored in the DynamoDB. The data can be exported to a csv file from the Web UI as a new dataset for retraining the RNN Sentiment Prediction model
+>
+![png](assets/UC3b.png)
+> 2. User accesses the Csv file download endpoint to download prediction results stored in the DynamoDB. This csv file can then be used as a new dataset for retraining the RNN Sentiment Prediction model
 >
 >
 ### Implementation Impediments and Resolutions
@@ -161,3 +161,10 @@ This is a POC (proof of concept) project the project team put together to implem
 The project was 100% unfunded and utilized AWS free-tier account to conduct the POC. The impediments experienced during the implementation and resolutions are listed below:
 
 ![png](assets/ImpRes.png)
+>
+>
+### Free Tier Budget Analysis and Usage Forecast
+![png](assets/ftbudget.png)
+> The All Free Tier services by usage report on the Cost Management Console shows ECR is the largest consumer of the free tier budget. With DockerHub in its place, ECR will stop burning the budget. The **[RNN Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** cloud can now stay on for live demo purpose
+>
+>
