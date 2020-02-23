@@ -5,7 +5,7 @@ This repo is the project page of the 3 project repos and contains information ab
 
 ![png](assets/BertelsmannChallenge.png)
 ## Project Website: :star2: **[AI Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** :star2:
-#### To save cost, only **_1 instance_** of AI prediction engine is up, though scaling **_up to 3 instances_** is feasible
+#### For cost saving, only **_1_** instance of AI prediction engine is up for demo, though scaling up to **_3_**  instances is feasible
 
 ## Presentation: view this page or [Google Drive (PowerPoint)](https://drive.google.com/file/d/1nfianScb00vW7owKBzpQHafxhsjp4IdJ/view?usp=sharing) or [Github (PDF)](https://github.com/bertelsmann-cloud-challenge-collaborate/ai-projpage/blob/master/AIAppOnAWS.pdf)
 
