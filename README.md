@@ -1,7 +1,7 @@
 # Udacity Bertelsmann Technical Scholarship Cloud Track Challenge Project - Deploy An AI Sentiment Prediction App to AWS Cloud
 This repo is the project page of the 3 project repos and contains information about the project.
  ---
-#### _The project was created by 3 scholars from the Cloud Track Challenge_
+#### _[Audrey](https://github.com/atan4583), [Adrik](https://github.com/Adriks976) and [Christopher](https://github.com/christopherrauh) from the Cloud Track Challenge are the co-creators of this project_
 
 ![png](assets/BertelsmannChallenge.png)
 ## Project Website: :star2: **[AI Sentiment Prediction App on AWS](http://ai-frontend.s3-website-us-west-2.amazonaws.com/)** :star2:
@@ -31,28 +31,28 @@ The project has 3 code and artifact repositories:
 >
 > * any changes pushed to the master branch will trigger the Github CI/CD Action on the repo to apply and deploy the changes to AWS
 
-## AI Sentiment Prediction App Use Case Demo
+## How to use AI Sentiment Prediction App
 ### Scenario I
 ![png](assets/UC1a.png)
-> 1. User enters a text in the web UI and click Submit to get a sentiment prediction result
+> 1. User enters a text in the web UI and click **Submit** button to get a sentiment prediction result
 >
 > 2. The RNN model returns a label (e.g. guilt) representing the predicted sentiment, which user can approve or revise
 >
 ![png](assets/UC1b.png)
-> 3. User clicks Approve button to accept the prediction result. The result is recorded to the DynamoDB
+> 3. User clicks **Approve** button to accept the prediction result. The result is recorded to the DynamoDB
 >
   ---
 ### Scenario II
 ![png](assets/UC2a.png)
-> 1. The RNN model prediction result returned does not quite met the user’s expectation. The user can click one of the seven available labels to override the returned result
+> 1. The RNN model prediction result returned does not quite match the user’s expectation. The user can click one of the seven available labels to override the returned result
 >
 ![png](assets/UC2b.png)
-> 2. User clicks ‘joy’ label to override the returned result ‘sadness’. The revised result is recorded to the DynamoDB
+> 2. User clicks **‘joy’** label to override the returned result **‘sadness’**. The revised result is recorded to the DynamoDB
 >
  ---
 ### Scenario III
 ![png](assets/UC3a.png)
-> 1. Approved and revised prediction results are stored in the DynamoDB. The data can be exported to a csv file from the Web UI as a new dataset for retraining the RNN Sentiment Prediction model
+> 1. All previously approved and revised prediction results are stored in the DynamoDB. The data can be exported to a csv file from the Web UI as a new dataset for retraining the RNN Sentiment Prediction model
 >
 ![png](assets/UC3b.png)
 > 2. User accesses the csv file **[download endpoint](https://gvvik49go8.execute-api.us-west-2.amazonaws.com/prod/getcsv)** to download prediction results stored in the DynamoDB. This csv file can then be used as a new dataset for retraining the RNN Sentiment Prediction model
@@ -61,7 +61,7 @@ The project has 3 code and artifact repositories:
 ## Project Information
 The project transforms the original infrastructure of an AI sentiment prediction app (trained on the RNN model) to an AWS cloud deployable infrastructure.
 
-**Project Goals**: Implements various AWS cloud stack concepts covered in Phase I of the scholoarship challenge, namely Lesson 12 thru 23, plus additional advanced concepts such as Serverless Framework, CI/CD, Docker, API Gateway, ECS, DockerHub, DynamoDB and Microservices.
+**Project Goals**: Implements various AWS cloud stack concepts covered in Phase I of Udacity | Bertelsmann Technical Scholoarship Cloud Track Challenge, i.e. S3, Lambda, Elastic Load Balancer, Auto Scaling Group, Cloudformation and IAM; as well as advanced concepts like Serverless Framework, CI/CD, Docker, API Gateway, ECS, DockerHub, DynamoDB and Microservices.
 
 **Project Team**: an international team with 3 members from Phase I of the Cloud Track Challenge:
 * [Adrik S](https://github.com/Adriks976) (France)
